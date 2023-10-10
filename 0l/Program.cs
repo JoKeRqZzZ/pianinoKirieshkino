@@ -1,65 +1,65 @@
-using System;
+    using System;
 
-namespace KirieshkaPianino
-{
-    internal class Program
+    namespace KirieshkaPianino
     {
-        static int[] firstOctave = new int[] { 261, 277, 293, 311, 329, 349, 370, 392, 415, 440, 466, 493 };
-        static int[] secondOctave = new int[] { 523, 554, 587, 622, 659, 698, 740, 784, 830, 880, 932, 988 };
-        static int[] thirdOctave = new int[] { 1047, 1109, 1175, 1254, 1319, 1397, 1480, 1568, 1661, 1760, 1865, 1976 };
-        static int[] currentOctave;
-
-        static void Main()
+        internal class Program
         {
-            Console.WriteLine("здрасте в пианино");
-            Console.WriteLine("f1,f2,f3 переключают оставы");
-            Console.WriteLine("эскейп выходит.");
+            static int[] firstOctave = new int[] { 261, 277, 293, 311, 329, 349, 370, 392, 415, 440, 466, 493 };
+            static int[] secondOctave = new int[] { 523, 554, 587, 622, 659, 698, 740, 784, 830, 880, 932, 988 };
+            static int[] thirdOctave = new int[] { 1047, 1109, 1175, 1254, 1319, 1397, 1480, 1568, 1661, 1760, 1865, 1976 };
+            static int[] currentOctave;
 
-            currentOctave = firstOctave;
-
-            while (true)
+            static void Main()
             {
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                Console.WriteLine("здрасте в пианино");
+                Console.WriteLine("f1,f2,f3 переключают оставы");
+                Console.WriteLine("эскейп выходит.");
 
-                if (keyInfo.Key == ConsoleKey.F1)
+                currentOctave = firstOctave;
+
+                while (true)
                 {
-                    currentOctave = firstOctave;
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+                    if (keyInfo.Key == ConsoleKey.F1)
+                    {
+                        currentOctave = firstOctave;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.F2)
+                    {
+                        currentOctave = secondOctave;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.F3)
+                    {
+                        currentOctave = thirdOctave;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.Escape)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        PlayPianinka(keyInfo.Key);
+                    }
                 }
-                else if (keyInfo.Key == ConsoleKey.F2)
+            }
+
+            static void PlayPianinka(ConsoleKey key)
+            {
+                int i;
+                if (key >= ConsoleKey.A && key <= ConsoleKey.Oem102)
                 {
-                    currentOctave = secondOctave;
-                }
-                else if (keyInfo.Key == ConsoleKey.F3)
-                {
-                    currentOctave = thirdOctave;
-                }
-                else if (keyInfo.Key == ConsoleKey.Escape)
-                {
-                    break;
+                    i = (int)key - (int)ConsoleKey.A;
                 }
                 else
-                {
-                    PlayPianinka(keyInfo.Key);
+                { 
+                    return;
                 }
-            }
-        }
-
-        static void PlayPianinka(ConsoleKey key)
-        {
-            int i;
-            if (key >= ConsoleKey.A && key <= ConsoleKey.Backspace)
-            {
-                i = (int)key - (int)ConsoleKey.A;
-            }
-            else
-            { 
-                return;
-            }
-            if (i >= 0 && i<currentOctave.Length)
-            {
-                int z = currentOctave[i];
-            Console.Beep(z, 200);
+                if (i >= 0 && i<currentOctave.Length)
+                {
+                    int z = currentOctave[i];
+                Console.Beep(z, 200);
+                }
             }
         }
     }
-}
