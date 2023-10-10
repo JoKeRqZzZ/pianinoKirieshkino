@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 
 namespace KirieshkaPianino
 {
     internal class Program
     {
-        static int[] firstOctave = new int[] { 261, 293, 329, 349, 392, 440, 493 };
-        static int[] secondOctave = new int[] { 523, 587, 659, 698, 784, 880, 988 };
-        static int[] thirdOctave = new int[] { 1047, 1175, 1319, 1397, 1568, 1760, 1976 };
+        static int[] firstOctave = new int[] { 261, 277, 293, 311, 329, 349, 370, 392, 415, 440, 466, 493 };
+        static int[] secondOctave = new int[] { 523, 554, 587, 622, 659, 698, 740, 784, 830, 880, 932, 988 };
+        static int[] thirdOctave = new int[] { 1047, 1109, 1175, 1254, 1319, 1397, 1480, 1568, 1661, 1760, 1865, 1976 };
         static int[] currentOctave;
 
         static void Main()
@@ -15,7 +15,7 @@ namespace KirieshkaPianino
             Console.WriteLine("f1,f2,f3 переключают оставы");
             Console.WriteLine("эскейп выходит.");
 
-            currentOctave = firstOctave; 
+            currentOctave = firstOctave;
 
             while (true)
             {
@@ -46,11 +46,19 @@ namespace KirieshkaPianino
 
         static void PlayPianinka(ConsoleKey key)
         {
-            int i = (int)key - (int)ConsoleKey.Q;
-            if (i >= 0 && i < currentOctave.Length)
+            int i;
+            if (key >= ConsoleKey.A && key <= ConsoleKey.Backspace)
+            {
+                i = (int)key - (int)ConsoleKey.A;
+            }
+            else
+            { 
+                return;
+            }
+            if (i >= 0 && i<currentOctave.Length)
             {
                 int z = currentOctave[i];
-                Console.Beep(z, 100);
+            Console.Beep(z, 200);
             }
         }
     }
